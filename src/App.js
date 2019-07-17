@@ -18,7 +18,8 @@ class App extends Component {
       { name: 'leo'},
       { name: 'libra'},
       { name: 'capricorn'},
-    ]
+    ],
+    showPersons: false
   }
 
   switchNameHandler = (newName) => {
@@ -44,6 +45,12 @@ class App extends Component {
     })
   }
 
+  togglePersonsHandler = () => {
+    console.log('hey');
+    const doesShow = this.state.showPersons;
+    this.setState({showPersons: !doesShow});
+  }
+
   changeConstellationName = (event) => {
     this.setState({
       constellations: [
@@ -65,26 +72,38 @@ class App extends Component {
       cursor: 'pointer'
     };
 
+    let persons = null;
+
+    if (this.state.showPersons) {
+      persons = (
+        <div>
+            <Person 
+              name={this.state.persons[0].name} 
+              age={this.state.persons[0].age} 
+              pClick={this.switchNameHandler.bind(this, 'Coookie!!')} />
+            <Person 
+              name = {this.state.persons[1].name} 
+              age={this.state.persons[1].age} />
+            <Person 
+              name={this.state.persons[2].name} 
+              age={this.state.persons[2].age} />
+            <Person 
+              name={this.state.persons[3].name} 
+              age={this.state.persons[3].age} 
+              changed={this.nameChangeHandler}/>
+          </div> 
+      );
+    }
+
     return (
       <div className="App">
         <h1>Hi, I'm a react app</h1>
         <button 
           style={buttonStyle} 
-          onClick={() => this.switchNameHandler('Dookie')}>Click</button>
-        <Person 
-          name={this.state.persons[0].name} 
-          age={this.state.persons[0].age} 
-          pClick={this.switchNameHandler.bind(this, 'Coookie!!')} />
-        <Person 
-          name = {this.state.persons[1].name} 
-          age={this.state.persons[1].age} />
-        <Person 
-          name={this.state.persons[2].name} 
-          age={this.state.persons[2].age} />
-        <Person 
-          name={this.state.persons[3].name} 
-          age={this.state.persons[3].age} 
-          changed={this.nameChangeHandler}/>
+          onClick={this.togglePersonsHandler}>Toggle Persons</button>
+       
+          {persons}
+
         <UserInput 
           constel={this.state.constellations[0].name} 
           somethingIsHappening={this.changeConstellationName}/>
