@@ -1,71 +1,61 @@
 import React, { Component } from 'react';
 import './App.css';
 import Person from './Person/Person';
-import UserInput from './Person/UserInput';
-import UserOutput from './Person/UserOutput';
+
 
 class App extends Component {
   state = {
     persons: [
-      { name: 'Silas', age: 1 },
-      { name: 'Sophia', age: 28},
-      { name: 'Veronika', age: 30 },
-      { name: 'Stephen', age: 30}
-    ],
-    constellations: [
-      { name: 'cancer'},
-      { name: 'aquarius'},
-      { name: 'leo'},
-      { name: 'libra'},
-      { name: 'capricorn'},
+      { id: 'pqowo', name: 'Silas', age: 1 },
+      { id: 'tyruei', name: 'Sophia', age: 28},
+      { id: 'nbmfj', name: 'Veronika', age: 30 },
+      { id: 'altyqp', name: 'Stephen', age: 30}
     ],
     showPersons: false
   }
 
-  switchNameHandler = (newName) => {
-    // console.log('clicked');
-    this.setState({
-      persons: [
-        { name: newName, age: 1 },
-        { name: 'Sophia', age: 28},
-        { name: 'Veronika', age: 30 },
-        { name: 'Stephen', age: 30}
-      ]
-    })
+  nameChangedHandler = (event, id) => {
+    //Return a boolean for all the persons in the array 
+    //and check if that id is the one being selected.
+    const personIndex = this.state.persons.findIndex(p => {
+      return p.id === id;
+    });
+
+    //get the person for that which the boolean returned true
+    const person = {
+      ...this.state.persons[personIndex]
+    };
+
+    //const person = Object.assign({}, this.state.persons[personIndex]);
+
+    //update the person's name
+    person.name = event.target.value;
+
+    //make an updated copy of the persons array
+    //and set the selected index to be the changed name
+    const persons = [...this.state.persons];
+    persons[personIndex] = person;
+
+    this.setState({persons: persons});
   }
 
-  nameChangeHandler = (event) => {
-    this.setState( {
-      persons: [
-        { name: 'What', age: 1 },
-        { name: 'Just', age: 28},
-        { name: 'Happened?', age: 30 },
-        { name: event.target.value, age: 30}
-      ]
-    })
+  deletePersonHandler = (personIndex) => {
+    // const persons = this.state.persons.slice();
+    const persons = [...this.state.persons];
+    persons.splice(personIndex, 1);
+    this.setState({persons: persons});
   }
 
   togglePersonsHandler = () => {
-    console.log('hey');
     const doesShow = this.state.showPersons;
     this.setState({showPersons: !doesShow});
   }
 
-  changeConstellationName = (event) => {
-    this.setState({
-      constellations: [
-        { name: event.target.value},
-        { name: 'aquarius'},
-        { name: 'leo'},
-        { name: 'libra'},
-        { name: 'capricorn'},
-      ]
-    })
-  }
 
   render() {
     const buttonStyle = {
-      backgroundColor: 'white',
+      backgroundColor: 'green',
+      color: 'white',
       font: 'inherit',
       border: '1px solid blue',
       padding: '8px',
@@ -77,41 +67,38 @@ class App extends Component {
     if (this.state.showPersons) {
       persons = (
         <div>
-            <Person 
-              name={this.state.persons[0].name} 
-              age={this.state.persons[0].age} 
-              pClick={this.switchNameHandler.bind(this, 'Coookie!!')} />
-            <Person 
-              name = {this.state.persons[1].name} 
-              age={this.state.persons[1].age} />
-            <Person 
-              name={this.state.persons[2].name} 
-              age={this.state.persons[2].age} />
-            <Person 
-              name={this.state.persons[3].name} 
-              age={this.state.persons[3].age} 
-              changed={this.nameChangeHandler}/>
-          </div> 
+          {this.state.persons.map((person, index) => {
+            return <Person 
+              dClick={() => this.deletePersonHandler(index)}
+              name={person.name} 
+              age={person.age} 
+              key={person.id} 
+              changed={(event) => this.nameChangedHandler(event, person.id)} />
+          })}
+        </div> 
       );
+
+      buttonStyle.backgroundColor = 'red'
+    }
+
+    let classes = [];
+    if (this.state.persons.length <= 2) {
+      classes.push('red'); //classes = ['red']
+    }
+    if (this.state.persons.length <= 1) {
+      classes.push('bold'); //classes = ['red', 'bold']
     }
 
     return (
       <div className="App">
         <h1>Hi, I'm a react app</h1>
+        <p className={classes.join(' ')}>This is really working</p>
         <button 
           style={buttonStyle} 
           onClick={this.togglePersonsHandler}>Toggle Persons</button>
        
           {persons}
 
-        <UserInput 
-          constel={this.state.constellations[0].name} 
-          somethingIsHappening={this.changeConstellationName}/>
-        <UserOutput constel={this.state.constellations[0].name}/>
-        <UserOutput constel={this.state.constellations[1].name}/>
-        <UserOutput constel={this.state.constellations[2].name}/>
-        <UserOutput constel={this.state.constellations[3].name}/>
-        <UserOutput constel={this.state.constellations[4].name}/>
       </div>
     );
   }
