@@ -6,6 +6,11 @@ import Radium, {StyleRoot} from 'radium';
 
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    console.log('[App.js] consstructor');
+  }
+
   state = {
     persons: [
       { id: 'pqowo', name: 'Silas', age: 1 },
@@ -14,6 +19,11 @@ class App extends Component {
       { id: 'altyqp', name: 'Stephen', age: 30}
     ],
     showPersons: false
+  }
+
+  static getDerivedStateFromProps(props, state) {
+    console.log('[App.js] getDerivedStateFromProps', props );
+    return state;
   }
 
   nameChangedHandler = (event, id) => {
@@ -55,7 +65,7 @@ class App extends Component {
 
 
   render() {
-    
+    console.log('[App.js] render');
 
     let persons = null;
 
