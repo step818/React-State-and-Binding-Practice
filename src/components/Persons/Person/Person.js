@@ -5,6 +5,16 @@ import Auxillary from '../../../hoc/Auxillary';
 import PropTypes from 'prop-types';
 
 class Person extends React.Component {
+    constructor(props) {
+        super(props);
+        this.inputElementRef = React.createRef();
+    }
+
+    componentDidMount() {
+        // this.inputElement.focus();
+        this.inputElementRef.current.focus();
+    }
+ 
     render() {
 
         const aStyle = {
@@ -12,13 +22,19 @@ class Person extends React.Component {
                 width: '450px'
             }
         }
-        console.log('[Person.js] rendering');
+        console.log('[Person.js] rendering...');
         return(
             <Auxillary>
+                {this.props.isAuth ? <p>Authenticated!</p> : <p>Please log in</p>}
                 <div className="Person" style={aStyle}>
                     <p onClick={this.props.dClick}>This person's name is {this.props.name} and they are {this.props.age} years old.</p>
                     <h3>{this.props.children}</h3>
-                    <input type="text" onChange={this.props.changed} value={this.props.name}/>
+                    <input
+                        // ref={(inputEl)=> {this.inputElement = inputEl}}
+                        ref={this.inputElementRef}
+                        type="text" 
+                        onChange={this.props.changed} 
+                        value={this.props.name}/>
                 </div>
             </Auxillary>
         );

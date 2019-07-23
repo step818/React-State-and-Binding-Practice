@@ -20,7 +20,8 @@ class App extends Component {
       { id: 'altyqp', name: 'Stephen', age: 30}
     ],
     showPersons: false,
-    showCockpit: true
+    showCockpit: true,
+    authenticated: false
   }
 
   static getDerivedStateFromProps(props, state) {
@@ -81,6 +82,9 @@ class App extends Component {
     this.setState({showPersons: !doesShow});
   }
 
+  loginHandler = () => {
+    this.setState({authenticated: true});
+  };
 
   render() {
     console.log('[App.js] render');
@@ -92,7 +96,8 @@ class App extends Component {
           <Persons 
             persons={this.state.persons}
             dClick={this.deletePersonHandler}
-            changed={this.nameChangedHandler}/>
+            changed={this.nameChangedHandler}
+            isAuthenticated={this.state.authenticated}/>
       );
 
       // buttonStyle.backgroundColor = 'red'
@@ -115,7 +120,9 @@ class App extends Component {
         <Cockpit 
           showPersons={this.state.showPersons} 
           personsLength={this.state.persons.length} 
-          tClicked={this.togglePersonsHandler}/>
+          tClicked={this.togglePersonsHandler}
+          login={this.loginHandler}
+          />
         ) : null }
           {persons}
 

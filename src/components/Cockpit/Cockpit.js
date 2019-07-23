@@ -1,15 +1,18 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import './Cockpit.css';
 // import Radium from 'radium';
 
 const cockpit = (props) => {
+  const toggleBtnRef = useRef(null);
+
   useEffect(() => {
     console.log('[Cockpit.js] useEffect');
     //Http Request...
-    setTimeout(() => {
-      alert('Saved data to cloud.');
-    }, 1000);
+    // setTimeout(() => {
+    //   alert('Saved data to cloud.');
+    // }, 1000);
+    toggleBtnRef.current.click();
     return () => {
       console.log('[Cockpit.js] cleanup work in useEffect');
     };
@@ -59,8 +62,10 @@ const cockpit = (props) => {
             <h1>Hi, I'm a react app</h1>
             <p className={classes.join(' ')}>This is really working</p>
             <button 
+                ref={toggleBtnRef}
                 style={buttonStyle} 
                 onClick={props.tClicked}>Toggle Persons</button>
+            <button onClick={props.login}>Log in</button>
         </div>
     );
 };
