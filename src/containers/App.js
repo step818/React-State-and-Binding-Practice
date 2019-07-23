@@ -4,6 +4,7 @@ import Persons from '../components/Persons/Persons';
 import Cockpit from '../components/Cockpit/Cockpit';
 import Radium, {StyleRoot} from 'radium';
 import WithClass from '../hoc/WithClass';
+import AuthContext from '../context/auth-context';
 
 
 class App extends Component {
@@ -116,16 +117,19 @@ class App extends Component {
           onClick={() => {
             this.setState({ showCockpit: false });
           }}>Remove Cockpit</button>
+        <AuthContext.Provider 
+          value={{
+            authenticated: this.state.authenticated,
+            login: this.loginHandler}} >
         {this.state.showCockpit ? (
         <Cockpit 
           showPersons={this.state.showPersons} 
           personsLength={this.state.persons.length} 
           tClicked={this.togglePersonsHandler}
-          login={this.loginHandler}
           />
         ) : null }
           {persons}
-
+        </AuthContext.Provider>
       </WithClass>
       </StyleRoot>
     );

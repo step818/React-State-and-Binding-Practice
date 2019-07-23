@@ -1,10 +1,12 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useContext } from 'react';
 import './Cockpit.css';
 // import Radium from 'radium';
+import AuthContext from '../../context/auth-context';
 
 const cockpit = (props) => {
   const toggleBtnRef = useRef(null);
+  const authContext = useContext(AuthContext);
 
   useEffect(() => {
     console.log('[Cockpit.js] useEffect');
@@ -65,7 +67,9 @@ const cockpit = (props) => {
                 ref={toggleBtnRef}
                 style={buttonStyle} 
                 onClick={props.tClicked}>Toggle Persons</button>
-            <button onClick={props.login}>Log in</button>
+            
+              <button onClick={authContext.login}>Log in</button>
+            
         </div>
     );
 };
