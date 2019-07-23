@@ -1,8 +1,26 @@
-import React from 'react';
+/* eslint-disable react-hooks/rules-of-hooks */
+import React, { useEffect } from 'react';
 import './Cockpit.css';
-import Radium from 'radium';
+// import Radium from 'radium';
 
 const cockpit = (props) => {
+  useEffect(() => {
+    console.log('[Cockpit.js] useEffect');
+    //Http Request...
+    setTimeout(() => {
+      alert('Saved data to cloud.');
+    }, 1000);
+    return () => {
+      console.log('[Cockpit.js] cleanup work in useEffect');
+    };
+  }, []);
+
+  useEffect(() => {
+    console.log('[Cockpit.js] 2nd useEffect');
+    return () => {
+      console.log('[Cockpit.js] cleanup work in 2nd useEffect');
+    };
+  });
 
     const buttonStyle = {
         backgroundColor: 'green',
@@ -47,4 +65,4 @@ const cockpit = (props) => {
     );
 };
 
-export default Radium(cockpit);
+export default cockpit;
