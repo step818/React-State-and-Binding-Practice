@@ -2,6 +2,7 @@ import React from 'react';
 import './Person.css';
 import Radium  from 'radium';
 import Auxillary from '../../../hoc/Auxillary';
+import PropTypes from 'prop-types';
 
 class Person extends React.Component {
     render() {
@@ -23,5 +24,12 @@ class Person extends React.Component {
         );
     }
 }
+
+Person.propTypes = {
+    dClick: PropTypes.func,
+    name: PropTypes.string,
+    age: PropTypes.number,
+    changed: PropTypes.func
+};
 
 export default Radium(Person);

@@ -105,8 +105,8 @@ class App extends Component {
     
 
     return (
-      // <StyleRoot>
-      <WithClass cSsStYlE="App">
+      <StyleRoot>
+       <WithClass cSsStYlE="App">
         <button
           onClick={() => {
             this.setState({ showCockpit: false });
@@ -120,7 +120,7 @@ class App extends Component {
           {persons}
 
       </WithClass>
-      // </StyleRoot>
+      </StyleRoot>
     );
   }
 }
