@@ -1,6 +1,7 @@
 import React from 'react';
 import './Person.css';
 import Radium  from 'radium';
+import Auxillary from '../../../hoc/Auxillary';
 
 class Person extends React.Component {
     render() {
@@ -12,11 +13,13 @@ class Person extends React.Component {
         }
         console.log('[Person.js] rendering');
         return(
-            <div className="Person" style={aStyle}>
-                <p onClick={this.props.dClick}>This person's name is {this.props.name} and they are {this.props.age} years old.</p>
-                <h3>{this.props.children}</h3>
-                <input type="text" onChange={this.props.changed} value={this.props.name}/>
-            </div>
+            <Auxillary>
+                <div className="Person" style={aStyle}>
+                    <p onClick={this.props.dClick}>This person's name is {this.props.name} and they are {this.props.age} years old.</p>
+                    <h3>{this.props.children}</h3>
+                    <input type="text" onChange={this.props.changed} value={this.props.name}/>
+                </div>
+            </Auxillary>
         );
     }
 }

@@ -3,6 +3,7 @@ import './App.css';
 import Persons from '../components/Persons/Persons';
 import Cockpit from '../components/Cockpit/Cockpit';
 import Radium, {StyleRoot} from 'radium';
+import WithClass from '../hoc/WithClass';
 
 
 class App extends Component {
@@ -98,14 +99,14 @@ class App extends Component {
       // buttonStyle[':hover'] = {
       //   backgroundColor: 'salmon',
       //   color: 'black'
-      //}
+      // }
     }
 
     
 
     return (
-      <StyleRoot>
-      <div className="App">
+      // <StyleRoot>
+      <WithClass cSsStYlE="App">
         <button
           onClick={() => {
             this.setState({ showCockpit: false });
@@ -113,13 +114,13 @@ class App extends Component {
         {this.state.showCockpit ? (
         <Cockpit 
           showPersons={this.state.showPersons} 
-          persons={this.state.persons} 
+          personsLength={this.state.persons.length} 
           tClicked={this.togglePersonsHandler}/>
         ) : null }
           {persons}
 
-      </div>
-      </StyleRoot>
+      </WithClass>
+      // </StyleRoot>
     );
   }
 }
