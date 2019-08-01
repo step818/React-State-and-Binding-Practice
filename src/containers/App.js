@@ -88,9 +88,8 @@ class App extends Component {
   };
 
   render() {
-    
-
     let persons = null;
+    let btnClass = '';
 
     if (this.state.showPersons) {
       persons = (
@@ -100,17 +99,16 @@ class App extends Component {
             changed={this.nameChangedHandler}
             isAuthenticated={this.state.authenticated}/>
       );
-
-      //buttonStyle.backgroundColor = 'red';
-      
+      btnClass = classes.Red;
     }
-
+    
     
 
     return (
       <div className={classes.App}>
         <h1>Hi, I'm a React App</h1>
         <button
+          className={btnClass}
           onClick={() => {
             this.setState({ showCockpit: false });
           }}>Remove Cockpit</button>

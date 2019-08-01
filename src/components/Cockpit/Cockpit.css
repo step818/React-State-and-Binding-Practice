@@ -15,15 +15,16 @@
   }
   
   .Cockpit button:hover {
-    background-color: lightgreen;
-    color: black;
-  }
-  
-  .Cockpit button.Red {
-    background-color: red;
-  }
-  
-  .Cockpit button.Red:hover {
-    background-color: salmon;
-    color: purple;
-  }
+  background-color: lightgreen;
+  color: black;
+}
+
+.Cockpit button.Red {
+  background-color: red;
+  color: white;
+}
+
+.Cockpit button.Red:hover {
+  background-color: salmon;
+  color: black;
+}

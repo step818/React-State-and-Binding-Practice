@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import React, { useEffect, useRef, useContext } from 'react';
-import './Cockpit.css';
+import classes from './Cockpit.css';
 // import Radium from 'radium';
 import AuthContext from '../../context/auth-context';
 
@@ -27,48 +27,52 @@ const cockpit = (props) => {
     };
   });
 
-    const buttonStyle = {
-        backgroundColor: 'green',
-        color: 'white',
-        font: 'inherit',
-        border: '1px solid blue',
-        padding: '8px',
-        cursor: 'pointer',
-        ':hover': {
-          backgroundColor: 'lightgreen',
-          color: 'black'
-        }
-      };
+    // const buttonStyle = {
+    //     backgroundColor: 'green',
+    //     color: 'white',
+    //     font: 'inherit',
+    //     border: '1px solid blue',
+    //     padding: '8px',
+    //     cursor: 'pointer',
+    //     ':hover': {
+    //       backgroundColor: 'lightgreen',
+    //       color: 'black'
+    //     }
+    //   };
 
 
 
-    let classes = [];
+    let assignedClasses = [];
+    let tglBtnClass = classes.Cockpit;
+    let lgnBtnClass = classes.Red;
 
-    if(props.showPersons) {
-        buttonStyle.backgroundColor = 'red'
-        buttonStyle[':hover'] = {
-        backgroundColor: 'salmon',
-        color: 'black'
-      }
-    }
+    // if(props.showPersons) {
+    //     buttonStyle.backgroundColor = 'red'
+    //     buttonStyle[':hover'] = {
+    //     backgroundColor: 'salmon',
+    //     color: 'black'
+    //   }
+    // }
 
     if (props.personsLength <= 2) {
-      classes.push('red'); //classes = ['red']
+      assignedClasses.push(classes.red); //classes = ['red']
     }
     if (props.personsLength <= 1) {
-      classes.push('bold'); //classes = ['red', 'bold']
+      assignedClasses.push(classes.bold); //classes = ['red', 'bold']
     }
 
     return (
         <div className="Cockpit">
             <h1>Hi, I'm a react app</h1>
-            <p className={classes.join(' ')}>This is really working</p>
-            <button 
+            <p className={assignedClasses.join(' ')}>This is really working</p>
+            <button
+                // className={tglBtnClass} 
                 ref={toggleBtnRef}
-                style={buttonStyle} 
                 onClick={props.tClicked}>Toggle Persons</button>
             
-              <button onClick={authContext.login}>Log in</button>
+              <button 
+                // className={lgnBtnClass}
+                onClick={authContext.login}>Log in</button>
             
         </div>
     );

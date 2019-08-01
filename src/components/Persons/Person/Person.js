@@ -1,5 +1,5 @@
 import React from 'react';
-import './Person.css';
+import classes from './Person.css';
 // import Radium  from 'radium';
 import Auxillary from '../../../hoc/Auxillary';
 import PropTypes from 'prop-types';
@@ -31,7 +31,7 @@ class Person extends React.Component {
                 <AuthContext.Consumer>
                 {(context) => context.authenticated ? <p>Authenticated!</p> : <p>Please log in</p>}
                 </AuthContext.Consumer>
-                <div className="Person">
+                <div className={classes.Person}>
                     <p onClick={this.props.dClick}>This person's name is {this.props.name} and they are {this.props.age} years old.</p>
                     <h3>{this.props.children}</h3>
                     <input
