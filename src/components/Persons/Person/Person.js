@@ -1,6 +1,6 @@
 import React from 'react';
 import './Person.css';
-import Radium  from 'radium';
+// import Radium  from 'radium';
 import Auxillary from '../../../hoc/Auxillary';
 import PropTypes from 'prop-types';
 import AuthContext from '../../../context/auth-context';
@@ -20,18 +20,18 @@ class Person extends React.Component {
  
     render() {
 
-        const aStyle = {
-            '@media (min-width: 500px)': {
-                width: '450px'
-            }
-        }
+        // const aStyle = {
+        //     '@media (min-width: 500px)': {
+        //         width: '450px'
+        //     }
+        // }
         console.log('[Person.js] rendering...');
         return(
             <Auxillary>
                 <AuthContext.Consumer>
                 {(context) => context.authenticated ? <p>Authenticated!</p> : <p>Please log in</p>}
                 </AuthContext.Consumer>
-                <div className="Person" style={aStyle}>
+                <div className="Person">
                     <p onClick={this.props.dClick}>This person's name is {this.props.name} and they are {this.props.age} years old.</p>
                     <h3>{this.props.children}</h3>
                     <input
@@ -53,4 +53,4 @@ Person.propTypes = {
     changed: PropTypes.func
 };
 
-export default Radium(Person);
+export default Person;

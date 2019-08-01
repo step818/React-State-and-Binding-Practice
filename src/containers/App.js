@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import './App.css';
+import  classes from './App.css';
 import Persons from '../components/Persons/Persons';
 import Cockpit from '../components/Cockpit/Cockpit';
-import Radium, {StyleRoot} from 'radium';
-import WithClass from '../hoc/WithClass';
+// import Radium, {StyleRoot} from 'radium';
+//import WithClass from '../hoc/WithClass';
 import AuthContext from '../context/auth-context';
 
 
@@ -88,7 +88,7 @@ class App extends Component {
   };
 
   render() {
-    console.log('[App.js] render');
+    
 
     let persons = null;
 
@@ -101,18 +101,15 @@ class App extends Component {
             isAuthenticated={this.state.authenticated}/>
       );
 
-      // buttonStyle.backgroundColor = 'red'
-      // buttonStyle[':hover'] = {
-      //   backgroundColor: 'salmon',
-      //   color: 'black'
-      // }
+      //buttonStyle.backgroundColor = 'red';
+      
     }
 
     
 
     return (
-      <StyleRoot>
-       <WithClass cSsStYlE="App">
+      <div className={classes.App}>
+        <h1>Hi, I'm a React App</h1>
         <button
           onClick={() => {
             this.setState({ showCockpit: false });
@@ -130,10 +127,9 @@ class App extends Component {
         ) : null }
           {persons}
         </AuthContext.Provider>
-      </WithClass>
-      </StyleRoot>
+      </div>
     );
   }
 }
 
-export default Radium(App);
+export default App;
